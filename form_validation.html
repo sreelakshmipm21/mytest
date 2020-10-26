@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>form validation</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+
+    <script>
+
+        function formvalidation() {
+            var name_elt = document.getElementById("username");
+            var email = document.getElementById("email");
+            var mailformat = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+
+            var password = document.getElementById("password").value;
+            var contact = document.getElementById("contact").value;
+            var gender = document.getElementsByName("gender");
+            var lang = document.getElementsByClassName("lang");
+            var lang_label = document.getElementsByClassName("error");
+            var name_msg = document.getElementById("name_msg");
+            var email_msg = document.getElementById("email_msg");
+            var password_msg = document.getElementById("password_msg");
+            var contact_msg = document.getElementById("contact_msg");
+            var gender_msg = document.getElementById("gender_msg");
+            var lang_msg = document.getElementById("lang_msg");
+            form_status = true;
+            if (name_elt.value == '') {
+                name_msg.style.visibility = 'visible';
+                form_status = false;
+            }
+            else {
+                name_msg.style.visibility = 'hidden';
+            }
+            if (email.value.match(mailformat)) {
+                email_msg.style.visibility = 'hidden';
+                
+            }
+            else {
+                email_msg.style.visibility = 'visible';
+                form_status = false;
+            }
+            if (password.length < 5) {
+                password_msg.style.visibility = 'visible';
+                form_status = false;
+            }
+            else {
+                password_msg.style.visibility = 'hidden';
+            }
+            if (contact.length < 10) {
+                contact_msg.style.visibility = 'visible';
+                form_status = false;
+            }
+            else {
+                contact_msg.style.visibility = 'hidden';
+            }
+            if (gender[0].checked == false && gender[1].checked == false) {
+                gender_msg.style.visibility = 'visible';
+                form_status = false;
+            }
+            else {
+                gender_msg.style.visibility = 'hidden';
+            }
+            if (lang[0].checked == true || lang[1].checked == true || lang[2].checked == true) {
+                lang_msg.style.visibility = 'hidden';
+                lang_label[0].style.color = 'black';
+                lang_label[1].style.color = 'black';
+                lang_label[2].style.color = 'black';
+            }
+            else {
+                lang_msg.style.visibility = 'visible';
+                
+                lang_label[0].style.color = 'red';
+                lang_label[1].style.color = 'red';
+                lang_label[2].style.color = 'red';
+                form_status = false;
+            }
+            if (form_status == false) {
+                return false;
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <div class="form-horizontal" style="margin-left: 200px; margin-right: 200px; padding: 20px; border: solid black; background-color: #f0e0b9;">
+        <form action="" method="POST">
+            <div class="form-group ">
+                <h1><b>
+                        <center><u>Registration form</u></center>
+                    </b></h1>
+                <label class="control-label">Name</label><br>
+                <input class="form-control" type="text" id="username" placeholder="Enter username">
+                <span id="name_msg" style="color: red; visibility: hidden;">Name required</span>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Email</label><br>
+                <input class="form-control" type="email" id="email" placeholder="Enter email">
+                <span id="email_msg" style="color: red; visibility: hidden;">input email in correct pattern</span>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Password</label><br>
+                <input class="form-control" type="password" id="password" placeholder="Enter password">
+                <span id="password_msg" style="color: red; visibility: hidden;">Min 5 char required</span>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Address</label><br>
+                <textarea class="form-control" type="textarea" id="comment"></textarea>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Contact number</label><br>
+                <input class="form-control" type="text" id="contact" placeholder="Enter phone number">
+                <span id="contact_msg" style="color: red; visibility: hidden;">Enter atleast 10 digit</span>
+            </div>
+            <div class="form-group">
+                <label>Gender :</label>
+                <label>Male</label> <input type="radio" name="gender">
+                <label>Female</label> <input type="radio" name="gender">
+                <span id="gender_msg" style="color: red; visibility: hidden;">Choose gender</span>
+            </div>
+            <div class="form-group">
+                <label>Languages Known</label>
+                <input type="checkbox" class="lang"><label class="error">English</label>
+                <input type="checkbox" class="lang"><label class="error">Hindi</label>
+                <input type="checkbox" class="lang"><label class="error">Malayalam</label>
+                <span id="lang_msg" style="color: red; visibility: hidden;"> </span>
+                <br>
+            </div>
+            <div class="form-group">
+<center>
+
+                <input type="submit" value="SUBMIT" class="btn btn-primary" onclick="return formvalidation()">
+
+            </center>
+            </div>
+        </form>
+    </div>
+
+</body>
+
+</html>
